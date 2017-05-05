@@ -6,7 +6,13 @@ const Path = require('path');
 const User = require('./server/models/user.js');
 require('dotenv').config();
 // connect to the database and load models
-require('./server/models').connect(process.env.EPMONGO || process.env.MONGO_KEY);
+require('./server/models').connect(process.env.EPMONGO || process.env.MONGO_KEY, function(err, success){
+  if(err){
+    console.err(err, 'mongo err');
+  } else {
+    console.log('mongo success')
+  }
+});
 
 // hello me
 const app = express();
@@ -79,7 +85,7 @@ app.get('*', (req, res) => {
 
 // start the server
 app.listen(process.env.PORT || 3000, (err, success) => {
-  if(err){
+  if (err) {
     console.log(err, 'error in listen');
   } else {
     console.log(`listening on ${process.env.PORT}`);
