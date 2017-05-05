@@ -78,6 +78,10 @@ app.get('*', (req, res) => {
 
 
 // start the server
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server is running on http://localhost:${process.env.PORT} or http://127.0.0.1:${process.env.PORT}`);
+app.listen(process.env.PORT || 3000, (err, success) => {
+  if(err){
+    console.log(err, 'error in listen');
+  } else {
+    console.log(`listening on ${process.env.PORT}`);
+  }
 });
