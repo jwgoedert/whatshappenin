@@ -6,9 +6,10 @@ const Path = require('path');
 const User = require('./server/models/user.js');
 require('dotenv').config();
 // connect to the database and load models
-require('./server/models').connect(process.env.EPMONGO || process.env.MONGO_KEY, function(err, success){
-  if(err){
-    console.err(err, 'mongo err');
+require('./server/models').connect(process.env.MONGO_KEY, null, (err) => {
+  console.log('im trying to connect yo')
+  if (err) {
+    console.error(err, 'mongo err');
   } else {
     console.log('mongo success')
   }
